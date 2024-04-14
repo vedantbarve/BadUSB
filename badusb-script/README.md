@@ -11,7 +11,7 @@ This is the script that runs when we insert the USB in the victim's machine. Bef
 5. Run Burn_AT85_bootloader.bat as admin.
 6. After a few seconds, a message AVRdude done will appear, indicating success.
 
-After following the above steps, make a PCB according to the schematic given in the [pcb]() folder.
+After following the above steps, make a PCB according to the schematic given in the [pcb](https://github.com/vedantbarve/BadUSB/tree/master/pcb) folder.
 
 ## Steps to setup Arduino IDE for Attiny85
 1. Add the following url to the Additional Borad Manager, in Files > Preferences : http://digistump.com/package_digistump_index.json.
