@@ -11,13 +11,12 @@ In this project, I have used Attiny85 as the microcontroller of choice as it is 
 2. Initiate a reverse shell connection from the victim to the attacker to gain command line access of the victim's machine.
 
 ## Contents
-| Sr. No. | Title         | Description                                                                                              | Link   |
-| ------- | ------------- | -------------------------------------------------------------------------------------------------------- | ------ |
-| 1.      | badusb-script | The script that runs when the USB is inserted into the victim's machine.                                 | [Go]() |
-| 2.      | http-server   | The HTTP server hosted on the attacker's machine which provides the payload to the victim.      | [Go]() |
-| 3.      | reverse-shell | The payloads written in C++ that establish the reverse-shell connection from the victim to the attacker. | [Go]() || -- | --- | ----------------------------- | ------ |
-| 4. | pcb | The PCB design for the BadSUB | [Go]() |
-
+| Sr. No. | Title         | Description                                                                                              |
+| ------- | ------------- | -------------------------------------------------------------------------------------------------------- | 
+| 1.      | badusb-script | The script that runs when the USB is inserted into the victim's machine.                                 |
+| 2.      | http-server   | The HTTP server hosted on the attacker's machine which provides the payload to the victim.      | 
+| 3.      | reverse-shell | The payloads written in C++ that establish the reverse-shell connection from the victim to the attacker. |
+| 4. | pcb | The PCB design for the BadSUB 
 ## Motivation
 In an ordinary cyberattack, an attacker tries to find vulnerabilities in the victim's machine by monitoring them over the network. With newer IDS and IPS techniques, it is quite difficult to penetrate a system when an attacker tries to connect with the victim.  
 On the other hand, the attacker can make changes on its machine to listen and accept for incoming connections. So if we make the victim connect to the attacker, there are no restrictions by the firewall.  
