@@ -1,0 +1,51 @@
+# Disclamer
+This project is for educational purpose only. Do not execute this attack on anyone without their consent. 
+
+# BadUSB
+In this world full of cyberattacks, humans are the weakest links to break into a system. The USB rubber ducky or BadUSB is a malicious tool, which when inserted into a system will inject keyboard strokes as if it is an HID (Human Interface Device like keyboard, mouse, game controller etc.).  
+
+In this project, I have used Attiny85 as the microcontroller of choice as it is cheap, compact and versatile. This project builds the BadUSB from ground up i.e we will be making the USB, flashing the bootloader, writing a script that runs when we insert the pendrive into the victim's machine and the payload that runs at the client side which compromises the system. This project initiates a reverse shell connection from the victim to the attacker to gain command line access of the victim's machine.
+
+## Aim of the project
+1. Run a powershell script on a windows machine after inserting the USB rubber ducky.
+2. Initiate a reverse shell connection from the victim to the attacker to gain command line access of the victim's machine.
+
+## Contents
+| Sr. No. | Title         | Description                                                                                              | Link   |
+| ------- | ------------- | -------------------------------------------------------------------------------------------------------- | ------ |
+| 1.      | badusb-script | The script that runs when the USB is inserted into the victim's machine.                                 | [Go]() |
+| 2.      | http-server   | The HTTP server hosted on the attacker's machine which provides the payload to the victim.      | [Go]() |
+| 3.      | reverse-shell | The payloads written in C++ that establish the reverse-shell connection from the victim to the attacker. | [Go]() || -- | --- | ----------------------------- | ------ |
+| 4. | pcb | The PCB design for the BadSUB | [Go]() |
+
+## Motivation
+In an ordinary cyberattack, an attacker tries to find vulnerabilities in the victim's machine by monitoring them over the network. With newer IDS and IPS techniques, it is quite difficult to penetrate a system when an attacker tries to connect with the victim.  
+On the other hand, the attacker can make changes on its machine to listen and accept for incoming connections. So if we make the victim connect to the attacker, there are no restrictions by the firewall.  
+Thus, a reverse shell attack seemed perfect for this usecase. 
+
+## Methodology
+![methodology-1](docs\methodology-1.JPG)
+After the USB rubber ducky is inserted into the victim's machine, following steps take place:  
+1. Keyboard stokes open powershell and use the curl command to download the payload (client.exe) from the "/" endpoint on the HTTP server hosted on PORT=8000 on the attacker's IP address.
+2. We run the client.exe file.
+3. On running the client.exe file, victim's machine initiates a connection with the attacker who is listening for incoming connections on its PORT=55555.
+4. Once the attacker accepts the incoming connection, we can start exchanging data. 
+
+## Softwares used
+1. ArduinoIDE :  
+    - To flash bootloader onto the Attiny85.  
+    - To burn the script that runs after inserting the USB.
+2. KiCAD :  
+    - To design the PCB for the USB.
+3. VScode :
+    - To make the payload in C++.
+
+## Future scope
+This project can be made dynamic by adding payloads for operating systems other than windows. We can send the OS data from the victim to the attacker first, so that the HTTP server will respond with appropriate payload. 
+
+## Contact me
+
+Please feel free to contact me via the email given below for any doubts. I am always open for any sort of constructive criticism.
+
+Email :- barvevedant@gmail.com
+

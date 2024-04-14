@@ -12,7 +12,7 @@ using namespace std;
 
 #define BUFFER_SIZE 2048
 #define PORT 55555
-#define IP_ADDR "192.168.29.120"
+#define IP_ADDR "10.10.15.177"
 
 string exec(string command) {
    char buffer[BUFFER_SIZE];
