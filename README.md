@@ -23,7 +23,7 @@ On the other hand, the attacker can make changes on its machine to listen and ac
 Thus, a reverse shell attack seemed perfect for this usecase. 
 
 ## Methodology
-![methodology-1](docs\methodology-1.JPG)
+![methodology](https://github.com/vedantbarve/BadUSB/blob/master/assets/methodology-1.JPG)
 After the USB rubber ducky is inserted into the victim's machine, following steps take place:  
 1. Keyboard stokes open powershell and use the curl command to download the payload (client.exe) from the "/" endpoint on the HTTP server hosted on PORT=8000 on the attacker's IP address.
 2. We run the client.exe file.

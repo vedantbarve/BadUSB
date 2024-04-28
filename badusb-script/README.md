@@ -4,7 +4,7 @@ This is the script that runs when we insert the USB in the victim's machine. Bef
 
 ## Steps to burn micronucleus bootloader on the attiny85 using Arduino Uno
 1. Configure Arduino Uno as ISP by uploading the script given in examples -> ArduinoISP onto it.
-![bootloader](..\docs\bootloader.png)
+![bootloader](https://github.com/vedantbarve/BadUSB/blob/master/assets/bootloader.png)
 2. Make appropriate connections as given above.
 3. Edit the COM number to which the Arduino Uno has been connected in the Burn_AT85_bootloader.bat file, for example, COM5.
 4. Move both the files ATtiny85.hex and Burn_AT85_bootloader.bat to the root folder of Arduino IDE (selected while installing Arduino IDE).
