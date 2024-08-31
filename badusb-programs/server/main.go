@@ -20,7 +20,7 @@ func GetLocalIP() string {
 	return localAddress.IP.String()
 }
 
-func SocketServer(ipAddr string) {
+func SocketServer(ipAddr string, wg *sync.WaitGroup) {
 	server, err := net.Listen("tcp", ipAddr+":9999")
 	if err != nil {
 		panic(err)
@@ -46,11 +46,11 @@ func SocketServer(ipAddr string) {
 		conn.Read(buffer)
 		fmt.Println(string(buffer))
 	}
-
+	defer wg.Done()
 	defer conn.Close()
 }
 
-func HttpServer(ipAddr string) {
+func HttpServer(ipAddr string, wg *sync.WaitGroup) {
 	hostedOn := ipAddr + ":9998"
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -66,6 +66,7 @@ func HttpServer(ipAddr string) {
 		http.ServeContent(w, r, "client.exe", time.Now(), file)
 	})
 	http.ListenAndServe(hostedOn, nil)
+	defer wg.Done()
 }
 
 func main() {
@@ -74,10 +75,10 @@ func main() {
 	ipAddr := GetLocalIP()
 
 	wg.Add(1)
-	go SocketServer(ipAddr)
+	go SocketServer(ipAddr, &wg)
 
 	wg.Add(2)
-	go HttpServer(ipAddr)
+	go HttpServer(ipAddr, &wg)
 
 	wg.Wait()
 }
