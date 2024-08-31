@@ -34,7 +34,8 @@ func Execute(value string) string {
 }
 
 func main() {
-	conn, err := net.Dial("tcp", ":9999")
+	const ipAddr = "192.168.29.4" // IP Address of the socket server
+	conn, err := net.Dial("tcp", ipAddr+":9999")
 	if err != nil {
 		panic(err)
 	}
