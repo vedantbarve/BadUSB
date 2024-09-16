@@ -30,13 +30,13 @@ Thus, a reverse shell attack seemed perfect for this usecase.
 ## Methodology
 
 ![methodology](https://github.com/vedantbarve/BadUSB/blob/master/assets/methodology-1.JPG)
-** HTTP server port and Socket server port are changed to :9999 and :9998 respectively.
+** Socket server port and HTTP server port are changed to :9999 and :9998 respectively, while migrating from C++ to GO.
 
 After the USB rubber ducky is inserted into the victim's machine, following steps take place:
 
-1. Keyboard stokes open powershell and use the curl command to download the payload (client.exe) from the "/" endpoint on the HTTP server hosted on PORT=9999 on the attacker's IP address.
+1. Keyboard stokes open powershell and use the curl command to download the payload (client.exe) from the "/" endpoint on the HTTP server hosted on PORT=9998 on the attacker's IP address.
 2. We run the client.exe file.
-3. On running the client.exe file, victim's machine initiates a connection with the attacker who is listening for incoming connections on its PORT=9998.
+3. On running the client.exe file, victim's machine initiates a connection with the attacker who is listening for incoming connections on its PORT=9999.
 4. Once the attacker accepts the incoming connection, we can start exchanging data.
 
 ## Softwares used
